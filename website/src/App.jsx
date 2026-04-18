@@ -53,18 +53,18 @@ const App = () => {
       {/* Navigation */}
       <nav className="glass" style={{
         position: 'fixed', width: '100%', zIndex: 1000, 
-        padding: '1rem 10%', display: 'flex', 
+        padding: '0.5rem 5%', display: 'flex', 
         justifyContent: 'space-between', alignItems: 'center'
       }}>
         <div className="logo">
           <img 
             src={isDark ? "/logo-white.png" : "/logo-colored.png"} 
             alt="Seven Seas Logo" 
-            style={{ height: '150px', transition: '0.3s', objectFit: 'contain' }} 
+            style={{ height: '120px', transition: '0.3s', objectFit: 'contain' }} 
           />
         </div>
-        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
-          <ul style={{ display: 'flex', gap: '2rem', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.85rem' }}>
+        <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+          <ul className="nav-links" style={{ display: 'flex', gap: '2rem', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.85rem' }}>
             <li><a href="#hero">Home</a></li>
             <li><a href="#services">Services</a></li>
             <li><a href="#portfolio">Portfolio</a></li>
@@ -80,7 +80,7 @@ const App = () => {
       {/* Hero Section */}
       <header id="hero" style={{
         height: '100vh', display: 'flex', alignItems: 'center', 
-        position: 'relative', overflow: 'hidden', padding: '0 10%'
+        position: 'relative', overflow: 'hidden', padding: '0 5%'
       }}>
         {/* Carousel Background */}
         <AnimatePresence mode="wait">
@@ -181,7 +181,7 @@ const App = () => {
               <img 
                 src={isDark ? "/logo-white.png" : "/logo-colored.png"} 
                 alt="Seven Seas Highlight" 
-                style={{ width: '400px', transform: 'scale(1.1)', filter: isDark ? 'drop-shadow(0 0 20px rgba(124, 221, 237, 0.3))' : 'none' }} 
+                style={{ width: '100%', maxWidth: '400px', filter: isDark ? 'drop-shadow(0 0 20px rgba(124, 221, 237, 0.3))' : 'none' }} 
               />
             </div>
           </motion.div>
@@ -374,10 +374,10 @@ const App = () => {
       </section>
 
       {/* Contact Section */}
-      <footer id="contact" style={{ background: 'var(--card-bg)', padding: '100px 10% 40px' }}>
+      <footer id="contact" style={{ background: 'var(--card-bg)', padding: '80px 5% 40px' }}>
         <div className="grid-3" style={{ marginBottom: '60px' }}>
           <div>
-            <img src={isDark ? "/logo-white.png" : "/logo-colored.png"} alt="Logo" style={{ height: '250px', marginBottom: '30px', objectFit: 'contain' }} />
+            <img src={isDark ? "/logo-white.png" : "/logo-colored.png"} alt="Logo" style={{ width: '100%', maxWidth: '250px', marginBottom: '30px', objectFit: 'contain' }} />
             <p>For Construction Solutions. Together, in step with the vision of our charismatic leaders.</p>
           </div>
           <div>
