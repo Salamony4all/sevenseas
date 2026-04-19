@@ -13,21 +13,21 @@ const App = () => {
   const [showAllProjects, setShowAllProjects] = useState(false);
 
   const galleryImages = [
-    "image_p11_0.jpeg", "image_p12_0.jpeg", "image_p12_1.jpeg", "image_p12_2.jpeg",
-    "image_p12_3.jpeg", "image_p13_0.jpeg", "image_p13_1.jpeg", "image_p13_2.jpeg",
-    "image_p13_3.png", "image_p14_0.jpeg", "image_p14_1.jpeg", "image_p14_2.jpeg",
-    "image_p14_3.jpeg", "image_p15_0.jpeg", "image_p15_1.png", "image_p15_2.png",
-    "image_p16_0.jpeg", "image_p16_1.jpeg", "image_p17_0.jpeg", "image_p17_1.jpeg",
-    "image_p17_2.jpeg", "image_p17_3.jpeg", "image_p18_0.png", "image_p18_1.png",
-    "image_p20_3.png", "image_p22_2.png", "image_p4_0.jpeg", "image_p5_0.jpeg"
+    "image_p1_0.jpeg", "image_p2_0.jpeg", "image_p3_0.jpeg", "image_p4_0.jpeg", "image_p5_0.jpeg",
+    "image_p7_0.jpeg", "image_p12_0.jpeg", "image_p12_1.jpeg", "image_p12_2.jpeg", "image_p12_3.jpeg",
+    "image_p13_0.jpeg", "image_p13_1.jpeg", "image_p13_2.jpeg", "image_p13_3.png",
+    "image_p14_0.jpeg", "image_p14_1.jpeg", "image_p14_2.jpeg", "image_p14_3.jpeg",
+    "image_p15_0.jpeg", "image_p15_1.png", "image_p16_0.jpeg", "image_p16_1.jpeg",
+    "image_p17_0.jpeg", "image_p17_1.jpeg", "image_p17_2.jpeg", "image_p17_3.jpeg",
+    "image_p18_0.png", "image_p18_1.png", "image_p18_2.jpeg", "image_p18_3.jpeg",
+    "image_p19_0.png", "image_p19_2.jpeg", "image_p19_3.jpeg",
+    "image_p20_0.jpeg", "image_p20_1.jpeg", "image_p20_2.jpeg", "image_p20_3.png",
+    "image_p21_0.jpeg", "image_p21_1.jpeg", "image_p21_2.jpeg", "image_p21_3.jpeg",
+    "image_p22_0.jpeg", "image_p22_1.jpeg", "image_p23_0.jpeg", "image_p23_1.jpeg",
+    "image_p24_1.jpeg", "image_p24_2.jpeg"
   ].map(img => `/projects/gallery/${img}`);
 
-  const heroImages = [
-    "/projects/h1.jpg",
-    "/projects/h2.jpg",
-    "/projects/h3.png",
-    "/projects/h4.png"
-  ];
+  const heroImages = galleryImages;
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -41,6 +41,19 @@ const App = () => {
   }, [isDark]);
 
   const toggleTheme = () => setIsDark(!isDark);
+  
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Seven Seas Muscat',
+        text: 'Seven Seas for Development and Investment - Construction, Fit-out, and Landscaping solutions in Oman.',
+        url: window.location.href,
+      }).catch(console.error);
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Link copied to clipboard!');
+    }
+  };
 
   const fadeInUp = {
     initial: { opacity: 0, y: 60 },
@@ -53,23 +66,24 @@ const App = () => {
       {/* Navigation */}
       <nav className="glass" style={{
         position: 'fixed', width: '100%', zIndex: 1000, 
-        padding: '0.5rem 5%', display: 'flex', 
+        height: 'var(--nav-height)',
+        padding: '0 5%', display: 'flex', 
         justifyContent: 'space-between', alignItems: 'center'
       }}>
-        <div className="logo">
+        <div className="logo" style={{ height: 'calc(var(--nav-height) - 40px)', display: 'flex', alignItems: 'center' }}>
           <img 
             src={isDark ? "/logo-white.png" : "/logo-colored.png"} 
             alt="Seven Seas Logo" 
-            style={{ height: '120px', transition: '0.3s', objectFit: 'contain' }} 
+            style={{ height: '100%', transition: '0.3s', objectFit: 'contain' }} 
           />
         </div>
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
-          <ul className="nav-links" style={{ display: 'flex', gap: '2rem', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.85rem' }}>
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#services">Services</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+          <ul className="nav-links" style={{ display: 'flex', gap: '2.5rem', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.9rem' }}>
+            <li><a href="#hero" className="hover-underline">Home</a></li>
+            <li><a href="#services" className="hover-underline">Services</a></li>
+            <li><a href="#portfolio" className="hover-underline">Portfolio</a></li>
+            <li><a href="#about" className="hover-underline">About</a></li>
+            <li><a href="#contact" className="hover-underline">Contact</a></li>
           </ul>
           <button onClick={toggleTheme} className="btn" style={{ background: 'transparent', padding: '8px' }}>
             {isDark ? <Sun size={24} color="#7CDDED" /> : <Moon size={24} color="#0C4964" />}
@@ -113,6 +127,7 @@ const App = () => {
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="hero-content"
           >
             <h4 style={{ 
               color: 'var(--accent-color)', textTransform: 'uppercase', 
@@ -138,7 +153,7 @@ const App = () => {
               Defining the future of construction in Oman through sustainable 
               engineering and precision fit-out solutions.
             </p>
-            <div style={{ display: 'flex', gap: '1.5rem' }}>
+            <div className="hero-actions" style={{ display: 'flex', gap: '1.5rem' }}>
               <motion.a 
                 href="#services" 
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
@@ -172,7 +187,7 @@ const App = () => {
             transition={{ duration: 1, delay: 0.2 }}
             style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           >
-            <div style={{
+            <div className="hero-card" style={{
               padding: '30px', background: 'rgba(255,255,255,0.05)',
               borderRadius: '30px', backdropFilter: 'blur(20px)',
               border: '1px solid rgba(255,255,255,0.1)',
@@ -391,9 +406,32 @@ const App = () => {
           <div>
             <h3 style={{ marginBottom: '20px' }}>Follow Us</h3>
             <div style={{ display: 'flex', gap: '15px' }}>
-              <a href="#" className="btn" style={{ padding: '10px', background: 'var(--primary-color)', color: 'white', borderRadius: '50%' }}><Camera size={20}/></a>
-              <a href="#" className="btn" style={{ padding: '10px', background: 'var(--primary-color)', color: 'white', borderRadius: '50%' }}><Share2 size={20}/></a>
-              <a href="#" className="btn" style={{ padding: '10px', background: 'var(--primary-color)', color: 'white', borderRadius: '50%' }}><MessageSquare size={20}/></a>
+              <button 
+                onClick={handleShare} 
+                className="btn" 
+                title="Share Website"
+                style={{ padding: '10px', background: 'var(--primary-color)', color: 'white', borderRadius: '50%', cursor: 'pointer' }}
+              >
+                <Share2 size={20}/>
+              </button>
+              <a 
+                href="https://api.whatsapp.com/send?phone=96871519695&text=Hello%20Seven%20Seas,%20I%20would%20like%20to%20inquire%20about%20your%20services." 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn" 
+                title="WhatsApp Inquiry"
+                style={{ padding: '10px', background: 'var(--primary-color)', color: 'white', borderRadius: '50%' }}
+              >
+                <MessageSquare size={20}/>
+              </a>
+              <a 
+                href="mailto:Info@sevenseasmuscat.com?subject=Business Inquiry - Seven Seas&body=Hello,\n\nI am interested in your construction and fit-out services. Please provide more information." 
+                className="btn" 
+                title="Send Email"
+                style={{ padding: '10px', background: 'var(--primary-color)', color: 'white', borderRadius: '50%' }}
+              >
+                <Mail size={20}/>
+              </a>
             </div>
           </div>
         </div>
