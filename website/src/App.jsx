@@ -136,9 +136,7 @@ const App = () => {
             }}>
               Seven Seas for Development and Investment
             </h4>
-            <h1 style={{ 
-              textShadow: isDark ? '0 4px 10px rgba(0,0,0,0.5)' : 'none'
-            }}>
+            <h1>
               Engineering, <br/>
               <span className="text-gradient">Construction Solutions</span>
             </h1>
