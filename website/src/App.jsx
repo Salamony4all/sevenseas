@@ -137,18 +137,14 @@ const App = () => {
               Seven Seas for Development and Investment
             </h4>
             <h1 style={{ 
-              fontSize: '4.5rem', 
-              lineHeight: 1.1, 
-              marginBottom: '2.5rem',
-              letterSpacing: '-2px',
               textShadow: isDark ? '0 4px 10px rgba(0,0,0,0.5)' : 'none'
             }}>
               Engineering, <br/>
-              <span>Construction Solutions</span>
+              <span className="text-gradient">Construction Solutions</span>
             </h1>
             <p style={{ 
-              fontSize: '1.3rem', marginBottom: '3rem', maxWidth: '550px',
-              lineHeight: 1.6, opacity: 0.8
+              marginBottom: '3rem', maxWidth: '550px',
+              opacity: 0.8
             }}>
               Defining the future of construction in Oman through sustainable 
               engineering and precision fit-out solutions.
@@ -205,8 +201,8 @@ const App = () => {
 
       {/* Services Section */}
       <section id="services">
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Core Solutions</h2>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(40px, 5vw, 60px)' }}>
+          <h2>Core Solutions</h2>
           <p>Comprehensive range of services designed to bring visions to life with precision.</p>
         </div>
         <div className="grid-3">
@@ -217,15 +213,16 @@ const App = () => {
           ].map((item, index) => (
             <motion.div 
               key={index} 
-              className="card-hover"
+              className="card-hover grid-card"
               {...fadeInUp}
               style={{
-                padding: '40px', background: 'var(--card-bg)', 
-                borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)'
+                padding: 'clamp(20px, 4vw, 40px)', background: 'var(--card-bg)', 
+                borderRadius: '24px', border: '1px solid rgba(0,0,0,0.05)',
+                display: 'flex', flexDirection: 'column', gap: '15px'
               }}
             >
-              <div style={{ color: 'var(--secondary-color)', marginBottom: '20px' }}>{item.icon}</div>
-              <h3 style={{ marginBottom: '15px' }}>{item.title}</h3>
+              <div style={{ color: 'var(--secondary-color)' }}>{item.icon}</div>
+              <h3>{item.title}</h3>
               <p>{item.desc}</p>
             </motion.div>
           ))}
@@ -236,7 +233,7 @@ const App = () => {
       <section style={{ background: 'var(--primary-color)', color: 'white' }}>
         <div className="grid-2">
           <motion.div {...fadeInUp}>
-            <h2 style={{ color: 'var(--cyan-color)', fontSize: '2.5rem', marginBottom: '20px' }}>
+            <h2 style={{ color: 'var(--cyan-color)' }}>
               Specialized Fit-out & <br/>Structural Works
             </h2>
             <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '30px' }}>
@@ -279,7 +276,7 @@ const App = () => {
           marginBottom: '60px', padding: '0 5%' 
         }}>
           <div style={{ textAlign: 'left' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Our Projects</h2>
+            <h2>Our Projects</h2>
             <p>Real-world execution showcasing our commitment to quality and excellence.</p>
           </div>
           {!showAllProjects && (
@@ -303,25 +300,27 @@ const App = () => {
         </div>
 
         {/* Featured Projects */}
-        <div className="grid-2" style={{ gap: '20px', padding: '0 5%', marginBottom: showAllProjects ? '40px' : '0' }}>
-          <div className="grid-2" style={{ gridTemplateColumns: '1fr', gap: '20px' }}>
-            <div 
-              style={{ height: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }} 
-              className="card-hover"
-              onClick={() => setSelectedImage("/projects/gallery/image_p2_0.jpeg")}
-            >
-              <img src="/projects/gallery/image_p2_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Villa" />
-            </div>
-            <div 
-              style={{ height: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }} 
-              className="card-hover"
-              onClick={() => setSelectedImage("/projects/gallery/image_p3_0.jpeg")}
-            >
-              <img src="/projects/gallery/image_p3_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Retail" />
-            </div>
+        <div className="portfolio-grid" style={{ 
+          display: 'grid', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '20px', padding: '0 5%'
+        }}>
+          <div 
+            style={{ minHeight: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }} 
+            className="card-hover"
+            onClick={() => setSelectedImage("/projects/gallery/image_p2_0.jpeg")}
+          >
+            <img src="/projects/gallery/image_p2_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Villa" />
           </div>
           <div 
-            style={{ height: '620px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }} 
+            style={{ minHeight: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }} 
+            className="card-hover"
+            onClick={() => setSelectedImage("/projects/gallery/image_p3_0.jpeg")}
+          >
+            <img src="/projects/gallery/image_p3_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Retail" />
+          </div>
+          <div 
+            style={{ minHeight: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer', gridColumn: 'span 1' }} 
             className="card-hover"
             onClick={() => setSelectedImage("/projects/gallery/image_p1_0.jpeg")}
           >
