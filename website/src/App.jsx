@@ -72,7 +72,7 @@ const App = () => {
         padding: '0 5%', display: 'flex', 
         justifyContent: 'space-between', alignItems: 'center'
       }}>
-        <div className="logo" style={{ height: 'calc(var(--nav-height) - 40px)', display: 'flex', alignItems: 'center' }}>
+        <div className="logo" style={{ height: 'calc(var(--nav-height) - 20px)', display: 'flex', alignItems: 'center' }}>
           <img 
             src={isDark ? "/logo-white.png" : "/logo-colored.png"} 
             alt="Seven Seas Logo" 
@@ -173,15 +173,9 @@ const App = () => {
         </AnimatePresence>
         
         {/* Modern Overlay Gradient */}
-        <div style={{
-          position: 'absolute', top: 0, left: 0, width: '100%', height: '100%',
-          background: isDark 
-            ? 'linear-gradient(to right, #05070a 30%, transparent 100%)' 
-            : 'linear-gradient(to right, #ffffff 30%, transparent 100%)',
-          zIndex: -1
-        }} />
+        <div className="hero-overlay" />
 
-        <div className="grid-2" style={{ width: '100%', zIndex: 1, gap: '40px' }}>
+        <div className="grid-2 hero-grid" style={{ width: '100%', zIndex: 1 }}>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -211,10 +205,9 @@ const App = () => {
                 href="#services" 
                 whileHover={{ scale: 1.05, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
                 whileTap={{ scale: 0.95 }}
-                className="btn btn-primary"
-                style={{ padding: '18px 40px', fontSize: '1.1rem' }}
+                className="btn btn-primary btn-hero"
               >
-                Our Expertise <ArrowRight size={22} />
+                Our Expertise <ArrowRight size={18} />
               </motion.a>
               <motion.a 
                 href="#portfolio" 
@@ -224,10 +217,9 @@ const App = () => {
                 }}
                 style={{ 
                   border: `2px solid ${isDark ? 'var(--cyan-color)' : 'var(--primary-color)'}`, 
-                  padding: '18px 40px', fontSize: '1.1rem',
                   color: isDark ? '#ffffff' : 'var(--primary-color)'
                 }}
-                className="btn"
+                className="btn btn-hero"
               >
                 Project Showcase
               </motion.a>
@@ -238,6 +230,7 @@ const App = () => {
             initial={{ opacity: 0, scale: 0.8, rotate: -5 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
+            className="hero-logo-container"
             style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
           >
             <div className="hero-card" style={{
@@ -318,7 +311,7 @@ const App = () => {
             }}
           >
             <img 
-              src="/projects/project4.jpg" 
+              src="/projects/gallery/image_p24_2.jpeg" 
               alt="Site Work" 
               style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
             />
@@ -423,7 +416,7 @@ const App = () => {
       <section id="about" className="grid-2">
         <motion.div {...fadeInUp}>
           <img 
-            src="/projects/project2.jpg" 
+            src="/projects/gallery/image_p22_0.jpeg" 
             alt="About Us" 
             style={{ width: '100%', borderRadius: '24px', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }} 
           />
