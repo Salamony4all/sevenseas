@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Sun, Moon, Hammer, DraftingCompass, Building, 
   MapPin, Phone, Mail, ArrowRight, Camera, 
-  Share2, MessageSquare, CheckCircle, Ruler, Paintbrush
+  Share2, MessageSquare, CheckCircle, Ruler, Paintbrush,
+  Menu, X
 } from 'lucide-react';
 
 const App = () => {
@@ -11,9 +12,10 @@ const App = () => {
   const [heroImageIndex, setHeroImageIndex] = useState(0);
   const [selectedImage, setSelectedImage] = useState(null);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const galleryImages = [
-    "image_p1_0.jpeg", "image_p2_0.jpeg", "image_p3_0.jpeg", "image_p4_0.jpeg", "image_p5_0.jpeg",
+    "image_p2_0.jpeg", "image_p3_0.jpeg", "image_p4_0.jpeg", "image_p5_0.jpeg",
     "image_p7_0.jpeg", "image_p12_0.jpeg", "image_p12_1.jpeg", "image_p12_2.jpeg", "image_p12_3.jpeg",
     "image_p13_0.jpeg", "image_p13_1.jpeg", "image_p13_2.jpeg", "image_p13_3.png",
     "image_p14_0.jpeg", "image_p14_1.jpeg", "image_p14_2.jpeg", "image_p14_3.jpeg",
@@ -79,16 +81,73 @@ const App = () => {
         </div>
         <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
           <ul className="nav-links" style={{ display: 'flex', gap: '2.5rem', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', fontSize: '0.9rem' }}>
-            <li><a href="#hero" className="hover-underline">Home</a></li>
+            <li><a href="#hero" className="hover-underline" onClick={() => setShowAllProjects(false)}>Home</a></li>
             <li><a href="#services" className="hover-underline">Services</a></li>
             <li><a href="#portfolio" className="hover-underline">Portfolio</a></li>
             <li><a href="#about" className="hover-underline">About</a></li>
             <li><a href="#contact" className="hover-underline">Contact</a></li>
           </ul>
-          <button onClick={toggleTheme} className="btn" style={{ background: 'transparent', padding: '8px' }}>
-            {isDark ? <Sun size={24} color="#7CDDED" /> : <Moon size={24} color="#0C4964" />}
-          </button>
+          
+          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <button onClick={toggleTheme} className="btn" style={{ background: 'transparent', padding: '8px' }}>
+              {isDark ? <Sun size={24} color="#7CDDED" /> : <Moon size={24} color="#0C4964" />}
+            </button>
+            
+            <button 
+              className="menu-toggle"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: '8px', zIndex: 3000 }}
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              style={{
+                position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh',
+                background: 'var(--navbar-bg)', backdropFilter: 'blur(15px)',
+                zIndex: 2500, display: 'flex', flexDirection: 'column',
+                justifyContent: 'center', alignItems: 'center', gap: '2rem'
+              }}
+            >
+              {[
+                { name: 'Home', href: '#hero' },
+                { name: 'Services', href: '#services' },
+                { name: 'Portfolio', href: '#portfolio' },
+                { name: 'About', href: '#about' },
+                { name: 'Contact', href: '#contact' }
+              ].map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  href={link.href}
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    if (link.href === '#hero') setShowAllProjects(false);
+                  }}
+                  style={{
+                    fontSize: '1.5rem', fontWeight: 700, 
+                    textTransform: 'uppercase', letterSpacing: '4px',
+                    color: 'var(--text-color)'
+                  }}
+                  className="hover-underline"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
       {/* Hero Section */}
@@ -122,7 +181,7 @@ const App = () => {
           zIndex: -1
         }} />
 
-        <div className="grid-2" style={{ width: '100%', zIndex: 1, gap: '60px' }}>
+        <div className="grid-2" style={{ width: '100%', zIndex: 1, gap: '40px' }}>
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -131,7 +190,7 @@ const App = () => {
           >
             <h4 style={{ 
               color: 'var(--accent-color)', textTransform: 'uppercase', 
-              letterSpacing: '4px', marginBottom: '1.5rem', fontWeight: 600,
+              letterSpacing: '4px', marginBottom: '1rem', fontWeight: 600,
               fontSize: '0.9rem'
             }}>
               Seven Seas for Development and Investment
@@ -141,7 +200,7 @@ const App = () => {
               <span className="text-gradient">Construction Solutions</span>
             </h1>
             <p style={{ 
-              marginBottom: '3rem', maxWidth: '550px',
+              marginBottom: '2rem', maxWidth: '550px',
               opacity: 0.8
             }}>
               Defining the future of construction in Oman through sustainable 
@@ -304,6 +363,13 @@ const App = () => {
           gap: '20px', padding: '0 5%'
         }}>
           <div 
+            className="grid-card glass card-hover" 
+            style={{ borderRadius: '30px', overflow: 'hidden', height: '350px', cursor: 'pointer' }}
+            onClick={() => setSelectedImage("/projects/gallery/image_p4_0.jpeg")}
+          >
+            <img src="/projects/gallery/image_p4_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Main Project" />
+          </div>
+          <div 
             style={{ minHeight: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer' }} 
             className="card-hover"
             onClick={() => setSelectedImage("/projects/gallery/image_p2_0.jpeg")}
@@ -317,13 +383,7 @@ const App = () => {
           >
             <img src="/projects/gallery/image_p3_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Retail" />
           </div>
-          <div 
-            style={{ minHeight: '300px', borderRadius: '16px', overflow: 'hidden', cursor: 'pointer', gridColumn: 'span 1' }} 
-            className="card-hover"
-            onClick={() => setSelectedImage("/projects/gallery/image_p1_0.jpeg")}
-          >
-            <img src="/projects/gallery/image_p1_0.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} alt="Main Project" />
-          </div>
+
         </div>
 
         {/* Expanded Gallery */}
