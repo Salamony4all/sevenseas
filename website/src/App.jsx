@@ -21,8 +21,8 @@ const App = () => {
     "image_p17_0.jpeg", "image_p17_1.jpeg", "image_p17_2.jpeg", "image_p17_3.jpeg",
     "image_p18_0.png", "image_p18_1.png", "image_p18_2.jpeg", "image_p18_3.jpeg",
     "image_p19_0.png", "image_p19_2.jpeg", "image_p19_3.jpeg",
-    "image_p20_0.jpeg", "image_p20_1.jpeg", "image_p20_2.jpeg", "image_p20_3.png",
-    "image_p21_0.jpeg", "image_p21_1.jpeg", "image_p21_2.jpeg", "image_p21_3.jpeg",
+    "image_p20_0.jpeg", "image_p20_1.jpeg", "image_p20_2.jpeg",
+    "image_p21_0.jpeg", "image_p21_1.jpeg", "image_p21_3.jpeg",
     "image_p22_0.jpeg", "image_p22_1.jpeg", "image_p23_0.jpeg", "image_p23_1.jpeg",
     "image_p24_1.jpeg", "image_p24_2.jpeg"
   ].map(img => `/projects/gallery/${img}`);
